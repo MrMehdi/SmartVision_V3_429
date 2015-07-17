@@ -1,0 +1,184 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Dsouza\Desktop\Insigma INC\SmartVision_V3_429_PCKaran\SmartVision_V3_429\Project\smartvision.uvproj
+Project File Date:  07/17/2015
+
+<h2>Output:</h2>
+Build target 'SmartVision'
+creating preprocessor file for system_stm32f4xx.c...
+creating preprocessor file for stm32f4xx_it.c...
+creating preprocessor file for misc.c...
+creating preprocessor file for stm32f4xx_dcmi.c...
+creating preprocessor file for stm32f4xx_dma.c...
+creating preprocessor file for stm32f4xx_gpio.c...
+creating preprocessor file for stm32f4xx_i2c.c...
+creating preprocessor file for stm32f4xx_rcc.c...
+creating preprocessor file for stm32f4xx_usart.c...
+creating preprocessor file for stm32f4xx_spi.c...
+creating preprocessor file for main.c...
+compiling main.c...
+..\src\main.c(37): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb,"I2C Speed: %d Khz\r\n",SCCB_SPEED/1000);
+..\src\main.c: 1 warning, 0 errors
+creating preprocessor file for serialcom.c...
+creating preprocessor file for camapi.c...
+creating preprocessor file for SCCB.C...
+..\src\SCCB.C(419): warning:  #1-D: last line of file ends without a newline
+  }
+..\src\SCCB.C: 1 warning, 0 errors
+creating preprocessor file for flash.c...
+..\src\flash.c(978): warning:  #1-D: last line of file ends without a newline
+  // }
+..\src\flash.c: 1 warning, 0 errors
+creating preprocessor file for camdrv.c...
+linking...
+Program Size: Code=12866 RO-data=3994 RW-data=65608 ZI-data=185184  
+FromELF: creating hex file...
+".\out\smv3.axf" - 0 Error(s), 3 Warning(s).
+r *restrict"
+        sprintf(sb," %d\r\n",t);
+..\src\flash.c(480): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %d\r\n",t);
+..\src\flash.c(432): warning:  #177-D: variable "add1" was declared but never referenced
+        s32 add1, add2;
+..\src\flash.c(432): warning:  #177-D: variable "add2" was declared but never referenced
+        s32 add1, add2;
+..\src\flash.c(585): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %X ",file_sys.header);
+..\src\flash.c(589): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %d ",file_sys.max_fno);
+..\src\flash.c(593): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %d ",file_sys.max_sz);
+..\src\flash.c(602): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+                sprintf(sb," %x ",fileinfo->file_tag);
+..\src\flash.c(606): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+                sprintf(sb," %d ",fileinfo->seq);
+..\src\flash.c(610): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+                sprintf(sb," %d ",fileinfo->sof);
+..\src\flash.c(614): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+                sprintf(sb," %d ",fileinfo->sz);
+..\src\flash.c(622): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+                                sprintf(sb," %x ",imgdebug.device_serial[i]);
+..\src\flash.c(655): warning:  #177-D: variable "sz" was declared but never referenced
+        u32 sz;
+..\src\flash.c(818): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %d Bytes\r\n",WORKING_PAGE_SZ);
+..\src\flash.c(978): warning:  #1-D: last line of file ends without a newline
+  // }
+..\src\flash.c: 17 warnings, 0 errors
+creating preprocessor file for camdrv.c...
+linking...
+Program Size: Code=12870 RO-data=3994 RW-data=65608 ZI-data=185184  
+FromELF: creating hex file...
+".\out\smv3.axf" - 0 Error(s), 19 Warning(s).
+Load "C:\\Users\\Dsouza\\Desktop\\Insigma INC\\SmartVision_V3_429_PCKaran\\SmartVision_V3_429\\Project\\out\\smv3.axf" 
+Set JLink Project File to "C:\Users\Dsouza\Desktop\Insigma INC\SmartVision_V3_429_PCKaran\SmartVision_V3_429\Project\JLinkSettings.ini"
+* JLink Info: Device "STM32F429VI" selected.
+ 
+JLink info:
+------------
+DLL: V4.98c, compiled Apr 23 2015 20:21:50
+Firmware: J-Link Lite-Cortex-M V8 compiled Jul 17 2014 11:40:12
+Hardware: V8.00
+S/N : 518107950 
+Feature(s) : GDB 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: CoreSight components:
+* JLink Info: ROMTbl 0 @ E00FF000
+* JLink Info: ROMTbl 0 [0]: FFF0F000, CID: B105E00D, PID: 000BB00C SCS
+* JLink Info: ROMTbl 0 [1]: FFF02000, CID: B105E00D, PID: 003BB002 DWT
+* JLink Info: ROMTbl 0 [2]: FFF03000, CID: B105E00D, PID: 002BB003 FPB
+* JLink Info: ROMTbl 0 [3]: FFF01000, CID: B105E00D, PID: 003BB001 ITM
+* JLink Info: ROMTbl 0 [4]: FFF41000, CID: B105900D, PID: 000BB9A1 TPIU
+* JLink Info: ROMTbl 0 [5]: FFF42000, CID: B105900D, PID: 000BB925 ETM
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F429VI
+VTarget = 2.970V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 500 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+lash.c(654): warning:  #177-D: variable "sz" was declared but never referenced
+        u32 sz;
+..\src\flash.c(817): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+        sprintf(sb," %d Bytes\r\n",WORKING_PAGE_SZ);
+..\src\flash.c(977): warning:  #1-D: last line of file ends without a newline
+  // }
+..\src\flash.c: 17 warnings, 0 errors
+creating preprocessor file for camdrv.c...
+compiling camdrv.c...
+..\src\camdrv.c(82): warning:  #188-D: enumerated type mixed with another type
+        GPIO_WriteBit(CAM_LED_PORT, CAM_LED_PIN,st);
+..\src\camdrv.c(86): warning:  #188-D: enumerated type mixed with another type
+        GPIO_WriteBit(CAM_RST_PORT, CAM_RST_PIN,st);
+..\src\camdrv.c(93): warning:  #188-D: enumerated type mixed with another type
+                GPIO_WriteBit(CAM_PWD1_PORT, CAM_PWD1_PIN, st);
+..\src\camdrv.c(97): warning:  #188-D: enumerated type mixed with another type
+                GPIO_WriteBit(CAM_PWD2_PORT, CAM_PWD2_PIN, st);
+..\src\camdrv.c(129): warning:  #111-D: statement is unreachable
+        RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);                   
+..\src\camdrv.c(346): warning:  #177-D: variable "sb" was declared but never referenced
+        u8 sb[50];
+..\src\camdrv.c: 6 warnings, 0 errors
+linking...
+Program Size: Code=12862 RO-data=3994 RW-data=65608 ZI-data=185184  
+FromELF: creating hex file...
+".\out\smv3.axf" - 0 Error(s), 38 Warning(s).
+Load "C:\\Users\\Dsouza\\Desktop\\Insigma INC\\SmartVision_V3_429_PCKaran\\SmartVision_V3_429\\Project\\out\\smv3.axf" 
+Set JLink Project File to "C:\Users\Dsouza\Desktop\Insigma INC\SmartVision_V3_429_PCKaran\SmartVision_V3_429\Project\JLinkSettings.ini"
+* JLink Info: Device "STM32F429VI" selected.
+ 
+JLink info:
+------------
+DLL: V4.98c, compiled Apr 23 2015 20:21:50
+Firmware: J-Link Lite-Cortex-M V8 compiled Jul 17 2014 11:40:12
+Hardware: V8.00
+S/N : 518107950 
+Feature(s) : GDB 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: CoreSight components:
+* JLink Info: ROMTbl 0 @ E00FF000
+* JLink Info: ROMTbl 0 [0]: FFF0F000, CID: B105E00D, PID: 000BB00C SCS
+* JLink Info: ROMTbl 0 [1]: FFF02000, CID: B105E00D, PID: 003BB002 DWT
+* JLink Info: ROMTbl 0 [2]: FFF03000, CID: B105E00D, PID: 002BB003 FPB
+* JLink Info: ROMTbl 0 [3]: FFF01000, CID: B105E00D, PID: 003BB001 ITM
+* JLink Info: ROMTbl 0 [4]: FFF41000, CID: B105900D, PID: 000BB9A1 TPIU
+* JLink Info: ROMTbl 0 [5]: FFF42000, CID: B105900D, PID: 000BB925 ETM
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F429VI
+VTarget = 2.976V
+State of Pins: 
+TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 500 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...

@@ -195,7 +195,7 @@ uint8_t SCCB_Write16(u16 Reg, u8 Data)
   I2C_GenerateSTOP(VISION_SCCB, ENABLE);
  for(i = 0; i< 0xff;i++);
   /* If operation is OK, return 0 */
-	Delayms(1); 
+	//Delayms(1); 
   return 0;
 }
 

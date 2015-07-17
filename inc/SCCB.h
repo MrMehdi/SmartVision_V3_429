@@ -42,7 +42,7 @@
 
 
 
-#define SCCB_SPEED              			 100000// 40000 //
+#define SCCB_SPEED              			 800000// 40000 //
 #define SCCB_SLAVE_ADDRESS7      			 0xFE
 
 /* Private function prototypes -----------------------------------------------*/

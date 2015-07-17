@@ -1,0 +1,22 @@
+--cpu Cortex-M4.fp
+".\out\startup_stm32f4xx.o"
+".\out\system_stm32f4xx.o"
+".\out\stm32f4xx_it.o"
+".\out\misc.o"
+".\out\stm32f4xx_dcmi.o"
+".\out\stm32f4xx_dma.o"
+".\out\stm32f4xx_gpio.o"
+".\out\stm32f4xx_i2c.o"
+".\out\stm32f4xx_rcc.o"
+".\out\stm32f4xx_usart.o"
+".\out\stm32f4xx_spi.o"
+".\out\main.o"
+".\out\serialcom.o"
+".\out\camapi.o"
+".\out\sccb.o"
+".\out\flash.o"
+".\out\camdrv.o"
+--strict --scatter ".\out\smv3.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\lst\smv3.map" -o .\out\smv3.axf

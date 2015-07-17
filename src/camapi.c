@@ -268,8 +268,8 @@ u8 CamApi_Init_Regs(void)
 	
 	r |= SCCB_Write(BANK_SEL, BANK_SEL_SENSOR);
 	r |= SCCB_Write(COM7, COM7_SRST);
-	/* delay n ms */
-	Delayms(100); 
+//	/* delay n ms */
+	Delayms(5); 
 	camr[0] = 0;
 	r |= SCCB_Write(0xFF, 0x01);//SELECT CMOS 
 	if(SCCB_Read(0x0A,camr)!=0)//READ PID
@@ -288,19 +288,19 @@ u8 CamApi_Init_Regs(void)
 	
 
 	
-	r |= CamApi_Set_Contrast(5);
+	r |= CamApi_Set_Contrast(3);
  	r |= CamApi_Set_Brightness(4);
  	r |= CamApi_Set_Saturation(3);
- 	r |= CamApi_Set_Quality(8);
-	r |= CamApi_Set_Lightmode(LIGHT_MODE_OFFICE);
+ 	r |= CamApi_Set_Quality(10);
+  r |= CamApi_Set_Lightmode(LIGHT_MODE_OFFICE);
 	r |= CamApi_Set_Effects(SPECIAL_EFFECT_NORMAL);
 	r |= CamApi_WriteTable(DS_CAP_7_5FPS);
   r |= CamApi_Set_Gain(GAIN_2X);//1-32
- 	r |= CamApi_Set_Shutter(200);	//default 312	-
+ 	r |= CamApi_Set_Shutter(800);	//default 312	-
 	
 	r |= CamApi_Set_Register(BANK_SEL_SENSOR,ADDVSL,(u8)0);
 	r |= CamApi_Set_Register(BANK_SEL_SENSOR,ADDVSH,(u8)0);
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM2,COM2_OUT_DRIVE_4x);
+	r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM2,COM2_OUT_DRIVE_3x);
   r |= CamApi_Set_Register(BANK_SEL_SENSOR,CLKRC,0x00);//enable internal multiplier(24 mhz clock generates about 18 Mhz piXCLK
 	
 	//r |= CamApi_Set_Register(BANK_SEL_DSP,0xda,0x12);//HREF = VSYNC
@@ -318,74 +318,7 @@ u8 CamApi_Init_Regs(void)
 	return(r);
 	
 }
-u8 CamApi_Setup(camera_setting * cs)
-{
-	
-	u8 r = 0;
-	
-	r |= SCCB_Write(BANK_SEL, BANK_SEL_SENSOR);
-	r |= SCCB_Write(COM7, COM7_SRST);
-	/* delay n ms */
-	Delayms(10); 
-	camr[0] = 0;
-	r |= SCCB_Write(0xFF, 0x01);//SELECT CMOS 
-	if(SCCB_Read(0x0A,camr)!=0)//READ PID
-		return(I2CFAIL);									//Camera did not respond, hardware failure
-	
-  if(camr[0] != 0x26)
-		return(I2CFAIL);
-	
-	r |= CamApi_WriteTable(AR_OV2640_JPEG_INIT);
-	r |= CamApi_WriteTable(AR_OV2640_YUV422);
-	r |= CamApi_WriteTable(AR_OV2640_JPEG);
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,0x15, 0);
-	r |= CamApi_WriteTable(AR_OV2640_1600x1200_JPEG);
-	
-// 	CamApi_WriteTable(default_regs);
-// 	CamApi_WriteTable(svga_regs);
-// 	CamApi_WriteTable(jpeg_regs);
-// 	CamApi_WriteTable(config_sz_regs);
-	
-	if(cs->quality < MAX_QUALITY)
-		cs->quality =  MAX_QUALITY;
-	
- 	r |= CamApi_Set_Contrast(cs->saturation);
- 		
- 	r |= CamApi_Set_Brightness(cs->brightness);
- 		
- 	r |= CamApi_Set_Saturation(cs->saturation);
- 		
- 	r |= CamApi_Set_Quality(cs->quality);
- 		
-	r |= CamApi_Set_Lightmode(cs->lightmode);
-	
-	r |= CamApi_Set_Effects(cs->effects);
-	
-	r |= CamApi_WriteTable(DS_CAP_7_5FPS);
-	
-	//r |= CamApi_Set_GainCeiling(COM9_AGC_GAIN_2x);//No effect
-  r |= CamApi_Set_Gain(GAIN_1X);//1-32
- 	r |= CamApi_Set_Shutter(1200);	//default 312	-
-	
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,ADDVSL,0);
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,ADDVSH,0);
-	
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM3,0x3C | 0x01);
-		
-		
-	//r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM2,cs->drive);
-  r |= CamApi_Set_Register(BANK_SEL_SENSOR,CLKRC,0x00);//enable internal multiplier
-	
-	//r |= CamApi_Set_Register(BANK_SEL_DSP,R_DVP_SP,R_DVP_SP_AUTO_MODE | 0x0);
-	//r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM4,0xb3);//High impedance data lines
-	//CamApi_Set_Register(BANK_SEL_SENSOR,COM7,COM7_COLOR_BAR);//Enable Color bar
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,COM7,COM7_RES_UXGA);//Zoom disabled
-	r |= CamApi_Set_Register(BANK_SEL_SENSOR,IMAGE_MODE, IMAGE_MODE_JPEG_EN|IMAGE_MODE_YUV422);
 
-
-
-	return(r);
-}
 void CamApi_load_default_settings(camera_setting * cs)
 {
 	cs->brightness = 3;
@@ -401,3 +334,32 @@ void CamApi_load_default_settings(camera_setting * cs)
 	cs->extra_lines = 0;
 	cs->click_seq = POWER_UP_CLICK_CAM1 | POWER_UP_CLICK_CAM2 | POWER_UP_CLICK_REV;
 }
+
+void CamApi_display_settings(camera_setting *cs)
+{
+	u8 sb[50];
+
+	SerComSendMessageUser("Camera Settings:\r\n");
+	sprintf((void*)sb,"Contrast:%d\t",cs->contrast);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Brightness:%d\t",cs->brightness);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Saturation:%d\t",cs->saturation);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Quality:%d\t",cs->quality);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Effects:%d\t",cs->effects);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"LightMode:%d\t",cs->lightmode);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Shutter Speed:%d\t",cs->shutter_speed);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Clock Div:%d\t",cs->cam_clock);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Click Delay:%d\t",cs->cdly);
+	SerComSendMessageUser(sb);
+	sprintf((void*)sb,"Drive Factor:%d\r\n",cs->drive);
+	SerComSendMessageUser(sb);
+	
+}
+

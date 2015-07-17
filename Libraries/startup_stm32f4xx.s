@@ -1,28 +1,35 @@
-;******************** (C) COPYRIGHT 2011 STMicroelectronics ********************
-;* File Name          : startup_stm32f4xx.s
+;******************** (C) COPYRIGHT 2013 STMicroelectronics ********************
+;* File Name          : startup_stm32f429_439xx.s
 ;* Author             : MCD Application Team
-;* Version            : V1.0.0
-;* Date               : 30-September-2011
-;* Description        : STM32F4xx devices vector table for MDK-ARM toolchain. 
+;* Version            : V1.3.0
+;* Date               : 08-November-2013
+;* Description        : STM32F429xx/439xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Set the initial PC == Reset_Handler
 ;*                      - Set the vector table entries with the exceptions ISR address
-;*                      - Configure the system clock and the external SRAM mounted on 
-;*                        STM324xG-EVAL board to be used as data memory (optional, 
-;*                        to be enabled by user)
+;*                      - Configure the system clock and the external SRAM/SDRAM mounted  
+;*                        on STM324x9I-EVAL boards to be used as data memory  
+;*                        (optional, to be enabled by user)
 ;*                      - Branches to __main in the C library (which eventually
 ;*                        calls main()).
 ;*                      After Reset the CortexM4 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
 ;* <<< Use Configuration Wizard in Context Menu >>>   
 ;*******************************************************************************
-; THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-; WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
-; AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
-; INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
-; CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
-; INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+; 
+; Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+; You may not use this file except in compliance with the License.
+; You may obtain a copy of the License at:
+; 
+;        http://www.st.com/software_license_agreement_liberty_v2
+; 
+; Unless required by applicable law or agreed to in writing, software 
+; distributed under the License is distributed on an "AS IS" BASIS, 
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+; 
 ;*******************************************************************************
 
 ; Amount of memory (in bytes) allocated for Stack
@@ -42,7 +49,7 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00000400
+Heap_Size       EQU     0x00000800
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
@@ -125,7 +132,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     TIM8_TRG_COM_TIM14_IRQHandler     ; TIM8 Trigger and Commutation and TIM14
                 DCD     TIM8_CC_IRQHandler                ; TIM8 Capture Compare                                   
                 DCD     DMA1_Stream7_IRQHandler           ; DMA1 Stream7                                           
-                DCD     FSMC_IRQHandler                   ; FSMC                                            
+                DCD     FMC_IRQHandler                    ; FMC                                             
                 DCD     SDIO_IRQHandler                   ; SDIO                                            
                 DCD     TIM5_IRQHandler                   ; TIM5                                            
                 DCD     SPI3_IRQHandler                   ; SPI3                                            
@@ -159,7 +166,16 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     CRYP_IRQHandler                   ; CRYP crypto                                     
                 DCD     HASH_RNG_IRQHandler               ; Hash and Rng
                 DCD     FPU_IRQHandler                    ; FPU
-                         
+                DCD     UART7_IRQHandler                  ; UART7
+                DCD     UART8_IRQHandler                  ; UART8
+                DCD     SPI4_IRQHandler                   ; SPI4
+                DCD     SPI5_IRQHandler                   ; SPI5
+                DCD     SPI6_IRQHandler                   ; SPI6
+                DCD     SAI1_IRQHandler                   ; SAI1
+                DCD     LTDC_IRQHandler                   ; LTDC
+                DCD     LTDC_ER_IRQHandler                ; LTDC error
+                DCD     DMA2D_IRQHandler                  ; DMA2D
+                                         
 __Vectors_End
 
 __Vectors_Size  EQU  __Vectors_End - __Vectors
@@ -272,7 +288,7 @@ Default_Handler PROC
                 EXPORT  TIM8_TRG_COM_TIM14_IRQHandler     [WEAK] 
                 EXPORT  TIM8_CC_IRQHandler                [WEAK]                                   
                 EXPORT  DMA1_Stream7_IRQHandler           [WEAK]                                          
-                EXPORT  FSMC_IRQHandler                   [WEAK]                                             
+                EXPORT  FMC_IRQHandler                    [WEAK]                                             
                 EXPORT  SDIO_IRQHandler                   [WEAK]                                             
                 EXPORT  TIM5_IRQHandler                   [WEAK]                                             
                 EXPORT  SPI3_IRQHandler                   [WEAK]                                             
@@ -305,7 +321,16 @@ Default_Handler PROC
                 EXPORT  DCMI_IRQHandler                   [WEAK]                                             
                 EXPORT  CRYP_IRQHandler                   [WEAK]                                     
                 EXPORT  HASH_RNG_IRQHandler               [WEAK]
-                EXPORT  FPU_IRQHandler                    [WEAK]                
+                EXPORT  FPU_IRQHandler                    [WEAK]
+                EXPORT  UART7_IRQHandler                  [WEAK]
+                EXPORT  UART8_IRQHandler                  [WEAK]
+                EXPORT  SPI4_IRQHandler                   [WEAK]
+                EXPORT  SPI5_IRQHandler                   [WEAK]
+                EXPORT  SPI6_IRQHandler                   [WEAK]
+                EXPORT  SAI1_IRQHandler                   [WEAK]
+                EXPORT  LTDC_IRQHandler                   [WEAK]
+                EXPORT  LTDC_ER_IRQHandler                [WEAK]
+                EXPORT  DMA2D_IRQHandler                  [WEAK]
 
 WWDG_IRQHandler                                                       
 PVD_IRQHandler                                      
@@ -355,7 +380,7 @@ TIM8_UP_TIM13_IRQHandler
 TIM8_TRG_COM_TIM14_IRQHandler  
 TIM8_CC_IRQHandler                                               
 DMA1_Stream7_IRQHandler                                                 
-FSMC_IRQHandler                                                            
+FMC_IRQHandler                                                            
 SDIO_IRQHandler                                                            
 TIM5_IRQHandler                                                            
 SPI3_IRQHandler                                                            
@@ -388,8 +413,16 @@ OTG_HS_IRQHandler
 DCMI_IRQHandler                                                            
 CRYP_IRQHandler                                                    
 HASH_RNG_IRQHandler
-FPU_IRQHandler                                                 
-
+FPU_IRQHandler  
+UART7_IRQHandler                  
+UART8_IRQHandler                  
+SPI4_IRQHandler                   
+SPI5_IRQHandler                   
+SPI6_IRQHandler                   
+SAI1_IRQHandler                   
+LTDC_IRQHandler                   
+LTDC_ER_IRQHandler                 
+DMA2D_IRQHandler                  
                 B       .
 
                 ENDP
@@ -424,4 +457,4 @@ __user_initial_stackheap
 
                  END
 
-;******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE*****
+;************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE*****

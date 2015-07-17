@@ -11,6 +11,10 @@
 	#define POWER_UP_CLICK_CAM2  (1<<2)
 	#define POWER_UP_CLICK_REV	 (2<<1)
 	
+	#define JPEG_BUFFER_SZ				1024*120 //Max size of one image
+	#define OFFLOAD_BUFFER_1SZ          56*1024
+	#define OFFLOAD_BUFFER_2SZ          64*1024
+
 	typedef struct
 	{
 		u32 header;
@@ -28,14 +32,30 @@
 		u8  click_seq;
 		u16 start_up_dly;
 	}camera_setting;
+	
+	typedef struct
+	{
+		u32 header;
+		u32 filesz[2];
+		u32 error;
+		u32 seqno;
+		u32 captime;
+		u8  device_serial[18];
+		camera_setting cs;
+		u16 footer;
+	}di;
 
+ extern	di imgdebug;
   extern u8 CamApi_Setup(camera_setting * c);
 	extern void Cam_LED(unsigned char enb);
 	void Cam_Configure_Peripherals(void);
 	u8 Cam_Init_Registers(camera_setting * cs);
-	u8 Cam_click_images(u8 clickseq,u16 dly);
+	u8 Cam_click_images(u16 dly,u32 * nseq,u32 * fsz);
 	void Cam_Test_3640(void);
 	u8 CamApi_Init_Regs(void);
 	u8 CamApi_Init_16Regs(void);
+	void CamApi_display_settings(camera_setting *cs);
+	void CamApi_load_default_settings(camera_setting * cs);
+	u8 Cam_Init_Power(void);
 #endif
 
